@@ -60,7 +60,7 @@ def can_find_by_multiple_attributes
 end
 
 def can_find_using_where_clause_and_be_sorted
-  Movie.where(release_date: 2003).or(Movie.where(release_date: 2004)).order(release_date: :desc)
+  Movie.where("release_date >= ?", 2003).order(release_date: :desc)
 end
 
 def can_be_found_updated_and_saved
@@ -84,7 +84,6 @@ def can_update_multiple_items_at_once
     Movie.create(title: "Movie_#{i}", release_date: 2000+i)
   end
   Movie.all.each do |m|
-    binding.pry
     m.title = "A Movie"
     m.save
   end
